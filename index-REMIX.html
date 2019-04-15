@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>REMIX</title>
+</head>
+<body>
+    <!-- I'm going to make a web application that let's you choose -->
+    <!-- What color you want the triangles in a triforce to be -->
+
+    <!-- The Title -->
+    <h1 class="title">Change the color of the triforce!</h1>
+
+    <!-- The Controls -->
+    <div class="controls">
+        <label for="top-color">Top Triangle Color:</label>
+        <input id="top-color" type="color" name="top">
+
+        <label for="left-color">Left Triangle Color:</label>
+        <input id="left-color" type="color" name="left">
+
+        <label for="right-color">Right Triangle Color:</label>
+        <input id="right-color" type="color" name="right">
+
+        <label for="defualt">Default</label>
+        <button id="default"></button>
+    </div>
+
+    <!-- The Triangles -->
+    <div class="triforce">
+        <div class="top">
+            <div class="triangle" id="top"></div>
+        </div>
+        <div class="bottom">
+            <div class="triangle" id="left"></div>
+            <div class="triangle" id="right"></div>
+        </div>
+    </div>
+
+    <style>
+        :root {
+            --default-triforce: #e1ff32;
+            --default-triforce-top: #e1ff32;
+            --default-triforce-left: #e1ff32;
+            --default-triforce-right: #e1ff32;
+        }
+
+        .triforce {
+            padding: 50px;
+            margin-top: 30px;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            justify-content: center;
+            justify-items: center;
+            background: rgb(94, 73, 4);
+        }
+
+        .bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: center;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 110px solid transparent;
+            border-right: 110px solid transparent;
+
+            border-bottom: 150px solid var(--default-triforce);
+        }
+
+        #top {
+            border-bottom-color: var(--default-triforce-top);
+        }
+
+        #left {
+            border-bottom-color: var(--default-triforce-left);
+        }
+
+        #right {
+            border-bottom-color: var(--default-triforce-right);
+        }
+
+        .title {
+            text-align: center;
+            font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 40pt;
+            color: blue;
+        }
+
+        .controls {
+            text-align: center;
+        }
+
+        label {
+            margin: 20px;
+            font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 800;
+        }
+
+        button {
+            width: 20px;
+            height: 20px;
+        }
+
+    </style>
+
+    <script>
+        
+        const inputs = document.querySelectorAll(".controls input");
+        const reset = document.querySelector(".controls button");
+        const topT = document.querySelector("#top");
+        const leftT = document.querySelector("#left");
+        const rightT = document.querySelector("#right");
+        const triangles = Array([topT, leftT, rightT]);
+
+        function handleUpdate() {
+            document.documentElement.style.setProperty(`--default-triforce-${this.name}`, this.value);
+        }
+
+        // function resetDefaults() {
+        //     triangle.style.border-bottom-color = "--default-triforce";            
+        // }
+
+        inputs.forEach(input => input.addEventListener('change', handleUpdate));
+        // reset.addEventListener('click', triangles.forEach(triangle => resetDefaults);
+
+
+    </script>
+
+</body>
+</html>
